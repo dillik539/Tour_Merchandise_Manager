@@ -1,5 +1,5 @@
 '''display menu of choices'''
-def get_menu_choice():
+def get_menu_choices():
     print('''
     1. Enter data
     2. Show total items sold
