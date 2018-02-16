@@ -13,7 +13,8 @@ def handle_choice(choice):
     elif choice == '5':
         delete_data()
     else:
-        print('Please enter the correct choice.')
+        ui.message('Please enter the correct choice.')
+        #print('Please enter the correct choice.')
 
 def add_data_to_event():
     place =ui.input_event()
@@ -28,13 +29,10 @@ def add_data_to_event():
     #dataManagement.add_to_sales(None,item_id,no_of_items)
 
 def add_data_to_item():
-    item_name = input('Enter the item name: ')
-    event_id = input('Enter the event id : ')
-    item_price = input('Enter the item price: ')
-    no_of_items = input('Enter the number of items: ')
+    input_items = ui.input_item()
     dataManagement.create_item_table()
-    #event_id = dataManagement.last_rowid()
-    dataManagement.add_to_item(None,event_id, item_name, item_price, no_of_items)
+    dataManagement.add_to_item(None,input_items[0], input_items[1], input_items[2], input_items[3])
+
 def display_data():
     dataManagement.show_Events_data()
     print()

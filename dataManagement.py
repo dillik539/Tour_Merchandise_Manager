@@ -68,7 +68,7 @@ def show_Events_data():
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
         for r in cur.execute('SELECT * FROM Events'):
-            print(r)
+            print (r)
 
 def show_Items_data():
     with sqlite3.connect(db_name) as db:
