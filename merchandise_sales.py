@@ -19,11 +19,17 @@ def handle_choice(choice):
         choices = ui.get_delete_choices()
         delete_data(choices)
     elif choice == '4':
-        display_data()
+        ui.message('Enter the selection from the following to drop desired table.')
+        choices = ui.get_drop_table_choices()
+        drop_tables(choices)
     elif choice == '5':
-        delete_data()
+        ui.message('Enter the selection from the following to search data from the desired table.')
+        choices = ui.get_search_data_choices()
+        search_data(choices)
     elif choice == '6':
-        drop_table()
+        ui.message('Enter the selection from the following to update data from desired table.')
+        choices = ui.get_update_data_choices()
+        update_tables(choices)
     else:
         ui.message('Please enter the correct choice.')
 
@@ -61,6 +67,36 @@ def delete_data(choices):
         dataManagement.delete_item_data()
     elif choices == '3':
         dataManagement.delete_sale_data()
+    else:
+        ui.message('Please enter the correct choice.')
+
+def update_tables(choices):
+    if choices == '1':
+        dataManagement.update_events_table()
+    elif choices == '2':
+        dataManagement.update_items_table()
+    elif choices == '3':
+        dataManagement.update_sales_table()
+    else:
+        ui.message('Please enter the correct choice.')
+
+def drop_tables(choices):
+    if choices == '1':
+        dataManagement.drop_events_table()
+    elif choices == '2':
+        dataManagement.drop_items_table()
+    elif choices == '3':
+        dataManagement.drop_sales_table()
+    else:
+        ui.message('Please enter the correct choice.')
+
+def search_data(choices):
+    if choices == '1':
+        dataManagement.search_events_data()
+    elif choices == '2':
+        dataManagement.search_items_data()
+    elif choices == '3':
+        dataManagement.search_sales_data()
     else:
         ui.message('Please enter the correct choice.')
 

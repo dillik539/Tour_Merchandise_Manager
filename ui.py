@@ -4,10 +4,10 @@ def get_menu_choices():
     1. Enter data
     2. Display data
     3. Delete data
-    6. Drop tables
-    7. Search data
-    8. Update data
-    9. Save data
+    4. Drop tables
+    5. Search data
+    6. Update data
+    7. Save data
     q. Quit
     ''')
     return input('Enter choice: ')
@@ -35,6 +35,30 @@ def get_delete_choices():
     3. Delete Sales data
     ''')
     return input('Enter delete choice: ')
+
+def get_drop_table_choices():
+    message('''
+    1. Drop Events table
+    2. Drop Items table
+    3. Drop Sales table
+    ''')
+    return input('Enter choice to drop desired table: ')
+
+def get_search_data_choices():
+    message('''
+    1. Search data from events
+    2. Search data from items
+    3. Search data from sales
+    ''')
+    return input('Enter choice to search data from desired table: ')
+
+def get_update_data_choices():
+    message('''
+    1. Update events table
+    2. Update items table
+    3. Update sales table
+    ''')
+    return input('Enter choice to update desired table: ')
 
 def input_event():
     return input('Enter venue name: ')

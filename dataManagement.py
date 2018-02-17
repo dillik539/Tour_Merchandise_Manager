@@ -82,6 +82,36 @@ def show_sales_data():
     for r in cur.execute('SELECT * FROM Sales'):
         print(r)
 
+def update_events_table():
+    event_id = input('Enter event id: ')
+    venue = input('Enter the new venue: ')
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
+        cur.execute('PRAGMA foreign_keys = ON')
+        sql_statement = ('UPDATE Events SET Venue = ? WHERE Event_ID = ?')
+        cur.execute(sql_statement, (venue, event_id))
+
+def update_items_table():
+    item_id = input('Enter item id: ')
+    event_id = input('Enter event id: ')
+    item = input('Enter the new item: ')
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
+        cur.execute('PRAGMA foreign_keys = ON')
+        sql_statement = ('UPDATE Items SET Item_Name = ? WHERE Event_ID = ? AND Item_ID = ?')
+        cur.execute(sql_statement, (item, event_id, item_id))
+
+def update_sales_table():
+    sale_id = input('Enter sale id: ')
+    item_id = input('Enter item id: ')
+    sale_price = input('Enter sale price: ')
+    sale_qty = input('Enter new sale quantity: ')
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
+        cur.execute('PRAGMA foreign_keys = ON')
+        sql_statement = ('UPDATE Sales SET Sale_Qty = ? WHERE Item_ID = ? AND Sales_ID = ?')
+        cur.execute(sql_statement, (sale_qty, item_id, sale_id))
+
 def last_rowid():
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
@@ -96,9 +126,39 @@ def sales_lastRowID():
     last_rowID = last_row[0]
     return last_rowID
 
-def drop_tables():
+def drop_events_table():
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
         cur.execute('DROP TABLE Events')
+def drop_items_table():
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
         cur.execute('DROP TABLE Items')
+def drop_sales_table():
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
         cur.execute('DROP TABLE Sales')
+
+def search_events_data():
+    search_id = input('Enter id to begin search: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement = ('SELECT * FROM Events WHERE Event_ID = ?')
+    for r in cur.execute(sql_statement, (search_id,)):
+        print(r)
+
+def search_items_data():
+    search_id = input('Enter id to begin search: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement = ('SELECT * FROM Items WHERE Item_ID = ?')
+    for r in cur.execute(sql_statement, (search_id,)):
+        print(r)
+
+def search_sales_data():
+    search_id = input('Enter id to begin search: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement = ('SELECT * FROM Sales WHERE Sales_ID = ?')
+    for r in cur.execute(sql_statement, (search_id,)):
+        print(r)
