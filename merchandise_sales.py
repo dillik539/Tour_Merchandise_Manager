@@ -15,7 +15,9 @@ def handle_choice(choice):
         display_data(choices)
 
     elif choice == '3':
-        add_data_to_sale()
+        ui.message('Enter the selection from the following to delete data from desired table.')
+        choices = ui.get_delete_choices()
+        delete_data(choices)
     elif choice == '4':
         display_data()
     elif choice == '5':
@@ -49,6 +51,16 @@ def display_data(choices):
         dataManagement.show_Items_data()
     elif choices == '3':
         dataManagement.show_sales_data()
+    else:
+        ui.message('Please enter the correct choice.')
+
+def delete_data(choices):
+    if choices == '1':
+        dataManagement.delete_event_data()
+    elif choices == '2':
+        dataManagement.delete_item_data()
+    elif choices == '3':
+        dataManagement.delete_sale_data()
     else:
         ui.message('Please enter the correct choice.')
 

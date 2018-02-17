@@ -1,6 +1,6 @@
 '''display menu of choices'''
 def get_menu_choices():
-    print('''
+    message('''
     1. Enter data
     2. Display data
     3. Delete data
@@ -13,7 +13,7 @@ def get_menu_choices():
     return input('Enter choice: ')
 
 def get_enter_choices():
-    print('''
+    message('''
     1. Enter data to Events table
     2. Enter data to Items table
     3. Enter data to Sales table
@@ -27,6 +27,14 @@ def get_display_choices():
     3. Show Sales data
     ''')
     return input('Enter display choice: ')
+
+def get_delete_choices():
+    message('''
+    1. Delete Events data
+    2. Delete Items data
+    3. Delete Sales data
+    ''')
+    return input('Enter delete choice: ')
 
 def input_event():
     return input('Enter venue name: ')
