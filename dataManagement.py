@@ -14,13 +14,13 @@ def create_event_table():
 def create_item_table():
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
-        cur.execute('''CREATE TABLE IF NOT EXISTS Items (Item_ID INTEGER PRIMARY KEY, Event_ID INTEGER REFERENCES Events(Event_ID),Item_Name TEXT, Item_Price MONEY, Item_Qty INTEGER)''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS Items (Item_ID INTEGER PRIMARY KEY, Event_ID INTEGER REFERENCES Events(Event_ID),Item_Name TEXT)''')
 
 
 def create_sales_table():
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
-        cur.execute('''CREATE TABLE IF NOT EXISTS Sales (Sales_ID INTEGER PRIMARY KEY, Item_ID INTEGER REFERENCES Items (Item_ID), Sold_Qty INTEGER)''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS Sales (Sales_ID INTEGER PRIMARY KEY, Item_ID INTEGER REFERENCES Items (Item_ID), Sale_price MONEY, Sale_Qty INTEGER)''')
 
 
 def add_to_event(id,e_date,place):
@@ -30,21 +30,21 @@ def add_to_event(id,e_date,place):
         sql_statement = ('INSERT INTO Events VALUES (:id,:e_date,:place)')
         cur.execute(sql_statement,{'id':event.get_event_id(),'e_date': event.get_event_date(),'place': event.get_venue()})
 
-def add_to_item(id, e_id, name, price, qty):
-    item = Items(id, e_id, name, price, qty)
+def add_to_item(id, e_id, name):
+    item = Items(id, e_id, name)
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
         cur.execute('PRAGMA foreign_keys = ON')
-        sql_statement = ('INSERT INTO Items VALUES (?,?,?,?,?)')
-        cur.execute(sql_statement,(item.get_item_id(),item.get_event_id(), item.get_name(),item.get_price(),item.get_quantity()))
+        sql_statement = ('INSERT INTO Items VALUES (?,?,?)')
+        cur.execute(sql_statement,(item.get_item_id(),item.get_event_id(), item.get_name()))
 
-def add_to_sales(id, i_id, sold_qty):
-    sale = Sales(id,i_id,sold_qty)
+def add_to_sales(id, i_id, price, qty):
+    sale = Sales(id,i_id, price, qty)
     with sqlite3.connect(db_name) as db:
         cur = db.cursor()
         cur.execute('PRAGMA foreign_keys = ON')
-        sql_statement = ('INSERT INTO Sales VALUES (?,?,?)')
-        cur.execute(sql_statement,(sale.get_sales_id(),sale.get_item_id(), sale.get_sold_qty()))
+        sql_statement = ('INSERT INTO Sales VALUES (?,?,?,?)')
+        cur.execute(sql_statement,(sale.get_sales_id(),sale.get_item_id(),sale.get_price(), sale.get_sold_qty()))
 
 def delete_event_data():
     data_to_delete = input('Enter the id: ')
@@ -95,3 +95,10 @@ def sales_lastRowID():
     last_row = cur.execute('SELECT Item_ID FROM Items ORDER BY Item_ID DESC LIMIT 1').fetchone()
     last_rowID = last_row[0]
     return last_rowID
+
+def drop_tables():
+    with sqlite3.connect(db_name) as db:
+        cur = db.cursor()
+        cur.execute('DROP TABLE Events')
+        cur.execute('DROP TABLE Items')
+        cur.execute('DROP TABLE Sales')

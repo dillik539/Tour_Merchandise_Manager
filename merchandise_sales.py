@@ -5,45 +5,52 @@ import dataManagement
 
 def handle_choice(choice):
     if choice == '1':
-        add_data_to_event()
+        ui.message('Please enter the selection from the following to enter data to desired table.')
+        choices = ui.get_enter_choices()
+        add_data(choices)
+
     elif choice == '2':
-        add_data_to_item()
+        ui.message('Enter the selection from the following to obtain data from the desired table.')
+        choices = ui.get_display_choices()
+        display_data(choices)
+
     elif choice == '3':
+        add_data_to_sale()
+    elif choice == '4':
         display_data()
     elif choice == '5':
         delete_data()
+    elif choice == '6':
+        drop_table()
     else:
         ui.message('Please enter the correct choice.')
-        #print('Please enter the correct choice.')
 
-def add_data_to_event():
-    place =ui.input_event()
 
-    today = datetime.datetime.now()
-    dataManagement.create_event_table()
+def add_data(choices):
+    if choices == '1':
+        place =ui.input_event()
+        today = datetime.datetime.now()
+        dataManagement.create_event_table()
+        dataManagement.create_sales_table()
+        dataManagement.add_to_event(None,today,place)
+    elif choices == '2':
+        input_items = ui.input_item()
+        dataManagement.create_item_table()
+        dataManagement.add_to_item(None,input_items[0], input_items[1])
+    elif choices == '3':
+        input_sales = ui.input_sale()
+        dataManagement.create_sales_table()
+        dataManagement.add_to_sales(None, input_sales[0], input_sales[1], input_sales[2])
 
-    dataManagement.create_sales_table()
-    dataManagement.add_to_event(None,today,place)
-
-    #item_id = dataManagement.sales_lastRowID()
-    #dataManagement.add_to_sales(None,item_id,no_of_items)
-
-def add_data_to_item():
-    input_items = ui.input_item()
-    dataManagement.create_item_table()
-    dataManagement.add_to_item(None,input_items[0], input_items[1], input_items[2], input_items[3])
-
-def display_data():
-    dataManagement.show_Events_data()
-    print()
-    dataManagement.show_Items_data()
-    print()
-    dataManagement.show_sales_data()
-
-def delete_data():
-    dataManagement.delete_item_data()
-    dataManagement.delete_event_data()
-    dataManagement.delete_sale_data()
+def display_data(choices):
+    if choices == '1':
+        dataManagement.show_Events_data()
+    elif choices == '2':
+        dataManagement.show_Items_data()
+    elif choices == '3':
+        dataManagement.show_sales_data()
+    else:
+        ui.message('Please enter the correct choice.')
 
 def main():
     quit = 'q'
