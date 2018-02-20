@@ -8,12 +8,10 @@ def handle_choice(choice):
         ui.message('Please enter the selection from the following to enter data to desired table.')
         choices = ui.get_enter_choices()
         add_data(choices)
-
     elif choice == '2':
         ui.message('Enter the selection from the following to obtain data from the desired table.')
         choices = ui.get_display_choices()
         display_data(choices)
-
     elif choice == '3':
         ui.message('Enter the selection from the following to delete data from desired table.')
         choices = ui.get_delete_choices()
@@ -30,6 +28,10 @@ def handle_choice(choice):
         ui.message('Enter the selection from the following to update data from desired table.')
         choices = ui.get_update_data_choices()
         update_tables(choices)
+    elif choice == '7':
+        ui.message('Enter the selection from the following to query data from the database.')
+        choices = ui.get_query_choices()
+        query_data(choices)
     else:
         ui.message('Please enter the correct choice.')
 
@@ -97,6 +99,16 @@ def search_data(choices):
         dataManagement.search_items_data()
     elif choices == '3':
         dataManagement.search_sales_data()
+    else:
+        ui.message('Please enter the correct choice.')
+
+def query_data(choices):
+    if choices == '1':
+        dataManagement.total_items_sold()
+    elif choices == '2':
+        dataManagement.maximum_items_sold()
+    elif choices == '3':
+        dataManagement.minimum_items_sold()
     else:
         ui.message('Please enter the correct choice.')
 

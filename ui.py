@@ -7,7 +7,7 @@ def get_menu_choices():
     4. Drop tables
     5. Search data
     6. Update data
-    7. Save data
+    7. Query data
     q. Quit
     ''')
     return input('Enter choice: ')
@@ -59,6 +59,14 @@ def get_update_data_choices():
     3. Update sales table
     ''')
     return input('Enter choice to update desired table: ')
+
+def get_query_choices():
+    message('''
+    1. Total items sold
+    2. Maximum items sold
+    3. Minimum items sold
+    ''')
+    return input('Enter choice to query data: ')
 
 def input_event():
     return input('Enter venue name: ')

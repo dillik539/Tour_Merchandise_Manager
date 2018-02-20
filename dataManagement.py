@@ -162,3 +162,28 @@ def search_sales_data():
     sql_statement = ('SELECT * FROM Sales WHERE Sales_ID = ?')
     for r in cur.execute(sql_statement, (search_id,)):
         print(r)
+
+def total_items_sold():
+    place = input('Enter the Item id: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement2 = ('SELECT Venue, Item_Name, SUM(Sale_Qty) FROM Sales JOIN Items ON Sales.Item_ID = Items.Item_ID JOIN Events ON Events.Event_ID = Items.Event_ID WHERE Sales.Item_ID  = ?')
+    items_sold = cur.execute(sql_statement2, (place, )).fetchall()
+    for r in items_sold:
+        print(r[2], r[1],'were sold at',r[0])
+
+def minimum_items_sold():
+    item = input('Enter item id: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement =  ('SELECT Venue, Item_Name, MIN(Sale_Qty) FROM Events JOIN Items ON Events.Event_ID =  Items.Event_ID JOIN Sales ON Items.Item_ID = Sales.Item_ID WHERE Items.Item_ID = ?')
+    for r in cur.execute(sql_statement, (item,)):
+        print('At minimum,', r[2], r[1],'were sold at', r[0])
+
+def maximum_items_sold():
+    item = input('Enter item id: ')
+    db = sqlite3.connect(db_name)
+    cur = db.cursor()
+    sql_statement = ('SELECT Venue, Item_Name, MAX(Sale_Qty) FROM Events JOIN Items ON Events.Event_ID =  Items.Event_ID JOIN Sales ON Items.Item_ID = Sales.Item_ID WHERE Items.Item_ID = ?')
+    for r in cur.execute(sql_statement, (item,)):
+        print('At maximum,', r[2], r[1],'were sold at', r[0])
