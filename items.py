@@ -1,3 +1,4 @@
+'''this class holds the items information'''
 class Items:
     def __init__(self, item_id, event_id, name):
         self.__item_id = item_id

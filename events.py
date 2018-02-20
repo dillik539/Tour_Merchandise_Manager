@@ -1,3 +1,4 @@
+'''this class holds the events information'''
 class Events:
     def __init__(self, event_id, event_date, venue):
         self.__event_id = event_id

@@ -1,3 +1,4 @@
+'''this class holds the sales information'''
 class Sales:
     def __init__(self,sales_id,item_id, price, sold_qty):
         self.__sales_id = sales_id

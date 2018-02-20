@@ -3,6 +3,7 @@ import traceback
 import datetime
 import dataManagement
 
+'''hanlde choice for various inputs, queries and displays'''
 def handle_choice(choice):
     if choice == '1':
         ui.message('Please enter the selection from the following to enter data to desired table.')
@@ -32,10 +33,8 @@ def handle_choice(choice):
         ui.message('Enter the selection from the following to query data from the database.')
         choices = ui.get_query_choices()
         query_data(choices)
-    else:
-        ui.message('Please enter the correct choice.')
 
-
+'''add data to tables'''
 def add_data(choices):
     if choices == '1':
         place =ui.input_event()
@@ -51,7 +50,7 @@ def add_data(choices):
         input_sales = ui.input_sale()
         dataManagement.create_sales_table()
         dataManagement.add_to_sales(None, input_sales[0], input_sales[1], input_sales[2])
-
+'''display data from the tables'''
 def display_data(choices):
     if choices == '1':
         dataManagement.show_Events_data()
@@ -61,7 +60,7 @@ def display_data(choices):
         dataManagement.show_sales_data()
     else:
         ui.message('Please enter the correct choice.')
-
+'''delete data from the tables based on the choices'''
 def delete_data(choices):
     if choices == '1':
         dataManagement.delete_event_data()
@@ -71,7 +70,7 @@ def delete_data(choices):
         dataManagement.delete_sale_data()
     else:
         ui.message('Please enter the correct choice.')
-
+'''update data in the tables based on the choices'''
 def update_tables(choices):
     if choices == '1':
         dataManagement.update_events_table()
@@ -81,7 +80,7 @@ def update_tables(choices):
         dataManagement.update_sales_table()
     else:
         ui.message('Please enter the correct choice.')
-
+'''drop tables based on the choices'''
 def drop_tables(choices):
     if choices == '1':
         dataManagement.drop_events_table()
@@ -91,7 +90,7 @@ def drop_tables(choices):
         dataManagement.drop_sales_table()
     else:
         ui.message('Please enter the correct choice.')
-
+'''search data from the tables based on the choices'''
 def search_data(choices):
     if choices == '1':
         dataManagement.search_events_data()
@@ -101,7 +100,7 @@ def search_data(choices):
         dataManagement.search_sales_data()
     else:
         ui.message('Please enter the correct choice.')
-
+'''query data to tables based on the choices'''
 def query_data(choices):
     if choices == '1':
         dataManagement.total_items_sold()

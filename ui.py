@@ -12,6 +12,7 @@ def get_menu_choices():
     ''')
     return input('Enter choice: ')
 
+'''display choices to enter data to tables'''
 def get_enter_choices():
     message('''
     1. Enter data to Events table
@@ -20,6 +21,7 @@ def get_enter_choices():
     ''')
     return input('Enter choice: ')
 
+'''display choices to display data from tables'''
 def get_display_choices():
     print('''
     1. Show Events data
@@ -28,6 +30,7 @@ def get_display_choices():
     ''')
     return input('Enter display choice: ')
 
+'''display choices to delete data from tables'''
 def get_delete_choices():
     message('''
     1. Delete Events data
@@ -36,6 +39,7 @@ def get_delete_choices():
     ''')
     return input('Enter delete choice: ')
 
+'''display choices to drop tables'''
 def get_drop_table_choices():
     message('''
     1. Drop Events table
@@ -44,6 +48,7 @@ def get_drop_table_choices():
     ''')
     return input('Enter choice to drop desired table: ')
 
+'''display choices to search data from tables'''
 def get_search_data_choices():
     message('''
     1. Search data from events
@@ -52,6 +57,7 @@ def get_search_data_choices():
     ''')
     return input('Enter choice to search data from desired table: ')
 
+'''display choices to update data of tables'''
 def get_update_data_choices():
     message('''
     1. Update events table
@@ -60,6 +66,7 @@ def get_update_data_choices():
     ''')
     return input('Enter choice to update desired table: ')
 
+'''display choices to query data from tables'''
 def get_query_choices():
     message('''
     1. Total items sold
